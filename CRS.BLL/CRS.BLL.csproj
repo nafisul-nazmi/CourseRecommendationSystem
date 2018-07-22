@@ -11,9 +11,4 @@
     <PackageReference Include="Unity.Mvc5" Version="1.3.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Generic\" />
-    <Folder Include="Services\" />
-  </ItemGroup>
-
 </Project>
