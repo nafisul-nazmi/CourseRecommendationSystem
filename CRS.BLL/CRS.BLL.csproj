@@ -7,6 +7,8 @@
   <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.2.0" />
     <PackageReference Include="SharpLearning.RandomForest" Version="0.28.3" />
+    <PackageReference Include="Unity" Version="5.8.6" />
+    <PackageReference Include="Unity.Mvc5" Version="1.3.0" />
   </ItemGroup>
 
   <ItemGroup>
