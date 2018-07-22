@@ -162,6 +162,12 @@
     <Folder Include="Controllers\" />
     <Folder Include="Models\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CRS.DAL\CRS.DAL.csproj">
+      <Project>{28E76519-8B1E-4B13-9E39-D5399E6439CF}</Project>
+      <Name>CRS.DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

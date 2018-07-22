@@ -5,6 +5,5 @@ using System.Text;
 namespace CRS.Entity.Generics
 {
     public class BaseEntity
-    {         
-    }
+    { }
 }
