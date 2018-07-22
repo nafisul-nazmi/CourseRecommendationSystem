@@ -12,9 +12,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Context\" />
-    <Folder Include="Generic\" />
+    <Folder Include="Contexts\" />
+    <Folder Include="Generics\" />
+    <Folder Include="Interfaces\" />
     <Folder Include="Repositories\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CRS.Entity\CRS.Entity.csproj" />
   </ItemGroup>
 
 </Project>
