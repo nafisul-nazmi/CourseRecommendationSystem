@@ -12,13 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
+    <Folder Include="Generic\" />
     <Folder Include="Services\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\CRS.DAL\CRS.DAL.csproj" />
-    <ProjectReference Include="..\CRS.Entity\CRS.Entity.csproj" />
   </ItemGroup>
 
 </Project>
