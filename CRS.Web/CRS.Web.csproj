@@ -163,6 +163,10 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CRS.DAL\CRS.DAL.csproj">
+      <Project>{28E76519-8B1E-4B13-9E39-D5399E6439CF}</Project>
+      <Name>CRS.DAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CRS.BLL\CRS.BLL.csproj">
       <Project>{806eb57c-91eb-4a6c-b0d1-5f15eb69141c}</Project>
       <Name>CRS.BLL</Name>

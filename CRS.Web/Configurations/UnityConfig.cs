@@ -1,5 +1,7 @@
-﻿using System;
+﻿using CRS.DAL.Contexts;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -15,6 +17,7 @@ namespace CRS.Web.Configurations
             var container = new UnityContainer();
 
             // Add mappings here
+            container.RegisterType<DbContext, CRSContext>();
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
