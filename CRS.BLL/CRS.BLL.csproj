@@ -12,8 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Generic\" />
-    <Folder Include="Services\" />
+    <ProjectReference Include="..\CRS.DAL\CRS.DAL.csproj" />
+    <ProjectReference Include="..\CRS.Entity\CRS.Entity.csproj" />
   </ItemGroup>
 
 </Project>
