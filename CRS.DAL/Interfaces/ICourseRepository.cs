@@ -5,6 +5,6 @@ using System.Text;
 
 namespace CRS.DAL.Interfaces
 {
-    interface ICourseRepository : IGenericRepository<Course>
+    public interface ICourseRepository : IGenericRepository<Course>
     { }
 }

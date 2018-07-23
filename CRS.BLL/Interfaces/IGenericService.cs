@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace CRS.DAL.Interfaces
+namespace CRS.BLL.Interfaces
 {
-    public interface IGenericRepository<T> where T : BaseEntity
+    public interface IGenericService<T> where T : BaseEntity
     {
         IEnumerable<T> GetAll();
         T Get(int id);

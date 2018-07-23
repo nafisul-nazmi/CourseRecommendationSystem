@@ -5,6 +5,6 @@ using System.Text;
 
 namespace CRS.DAL.Interfaces
 {
-    interface IPrerequisiteRepository : IGenericRepository<Prerequisite>
+    public interface IPrerequisiteRepository : IGenericRepository<Prerequisite>
     { }
 }

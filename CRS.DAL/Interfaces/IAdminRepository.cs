@@ -5,6 +5,6 @@ using System.Text;
 
 namespace CRS.DAL.Interfaces
 {
-    interface IAdminRepository : IGenericRepository<Admin>
+    public interface IAdminRepository : IGenericRepository<Admin>
     { }
 }
