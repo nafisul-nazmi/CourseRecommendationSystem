@@ -9,7 +9,6 @@ namespace CRS.Entity.Models
     public class Program : BaseEntity
     {
         // Database fields
-        public int ProgramId { get; set; }
         public string ProgramName { get; set; }
         public int DepartmentId { get; set; }
 

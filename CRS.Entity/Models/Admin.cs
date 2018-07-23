@@ -7,7 +7,7 @@ namespace CRS.Entity.Models
 {
     public class Admin : BaseEntity
     {
-        public int AdminId { get; set; }
+        // Database fields
         public string Email { get; set; }
         public string Password { get; set; }
     }
