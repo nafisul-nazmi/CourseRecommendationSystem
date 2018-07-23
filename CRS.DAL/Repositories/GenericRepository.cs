@@ -25,6 +25,11 @@ namespace CRS.DAL.Repositories
             return dbSet.AsEnumerable<T>();
         }
 
+        public virtual T Get(int id)
+        {
+            return dbSet.Where(x => x.Id == id).SingleOrDefault();
+        }
+
         public virtual IEnumerable<T> FindBy(Expression<Func<T, bool>> expression)
         {
             return dbSet.Where(expression).AsEnumerable<T>();
