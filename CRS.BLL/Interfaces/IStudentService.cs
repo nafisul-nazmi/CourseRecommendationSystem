@@ -3,8 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CRS.DAL.Interfaces
+namespace CRS.BLL.Interfaces
 {
-    public interface IStudentRepository : IGenericRepository<Student>
+    public interface IStudentService : IGenericService<Student>
     { }
 }
