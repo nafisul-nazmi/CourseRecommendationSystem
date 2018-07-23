@@ -20,33 +20,35 @@ namespace CRS.DAL.Repositories
             dbSet = dbContext.Set<T>();
         }
 
-        public IEnumerable<T> GetAll()
+        public virtual IEnumerable<T> GetAll()
         {
             return dbSet.AsEnumerable<T>();
         }
 
-        public IEnumerable<T> FindBy(Expression<Func<T, bool>> expression)
+        public virtual IEnumerable<T> FindBy(Expression<Func<T, bool>> expression)
         {
             return dbSet.Where(expression).AsEnumerable<T>();
         }
 
-        public T Add(T entity)
+        public virtual T Add(T entity)
         {
             var savedEntity = dbSet.Add(entity);
             dbContext.SaveChanges();
             return savedEntity;
         }
 
-        public T Delete(T entity)
+        public virtual T Delete(T entity)
         {
             var deletedEntity = dbSet.Remove(entity);
             dbContext.SaveChanges();
             return deletedEntity;
         }
 
-        public void Edit(T entity)
+        public virtual void Edit(T entity)
         {
-            throw new NotImplementedException();
+            dbSet.Attach(entity);
+            dbContext.Entry(entity).State = EntityState.Modified;
+            dbContext.SaveChanges();
         }
    
     }
