@@ -9,7 +9,6 @@ namespace CRS.Entity.Models
     public class Prerequisite : BaseEntity
     {
         // Database fields
-        public int PrerequisiteId { get; set; }
         public int CourseId { get; set; }
         public int CoursePrerequisiteId { get; set; }
 
