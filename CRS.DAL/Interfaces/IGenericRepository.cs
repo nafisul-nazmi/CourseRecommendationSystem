@@ -9,7 +9,7 @@ namespace CRS.DAL.Interfaces
     interface IGenericRepository<T> where T : BaseEntity
     {
         IEnumerable<T> GetAll();
-        T Get();
+        T Get(int id);
         IEnumerable<T> FindBy(Expression<Func<T, bool>> expression);
         T Add(T entity);
         T Delete(T entity);
