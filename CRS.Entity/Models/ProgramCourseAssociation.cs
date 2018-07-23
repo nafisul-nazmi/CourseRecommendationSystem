@@ -9,7 +9,6 @@ namespace CRS.Entity.Models
     public class ProgramCourseAssociation : BaseEntity
     {
         // Database fields
-        public int ProgramCourseAssociationId { get; set; }
         public int ProgramId { get; set; }
         public int CourseId { get; set; }
 

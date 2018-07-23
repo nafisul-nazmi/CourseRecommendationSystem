@@ -8,7 +8,6 @@ namespace CRS.Entity.Models
     public class Department : BaseEntity
     {
         // Database fields
-        public int DepartmentId { get; set; }
         public string DepartmentName { get; set; }
 
         // Navigation properties
