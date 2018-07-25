@@ -1,19 +1,93 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{25C2EEC5-54AF-4616-96E5-DA13DE30B102}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CRS.BLL</RootNamespace>
+    <AssemblyName>CRS.BLL</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
   </PropertyGroup>
-
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="EntityFramework" Version="6.2.0" />
-    <PackageReference Include="SharpLearning.RandomForest" Version="0.28.3" />
-    <PackageReference Include="Unity" Version="5.8.6" />
-    <PackageReference Include="Unity.Mvc5" Version="1.3.0" />
+    <Reference Include="SharpLearning.Common.Interfaces, Version=0.28.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpLearning.Common.Interfaces.0.28.3\lib\net461\SharpLearning.Common.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpLearning.Containers, Version=0.28.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpLearning.Containers.0.28.3\lib\net461\SharpLearning.Containers.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpLearning.DecisionTrees, Version=0.28.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpLearning.DecisionTrees.0.28.3\lib\net461\SharpLearning.DecisionTrees.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpLearning.InputOutput, Version=0.28.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpLearning.InputOutput.0.28.3\lib\net461\SharpLearning.InputOutput.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpLearning.RandomForest, Version=0.28.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpLearning.RandomForest.0.28.3\lib\net461\SharpLearning.RandomForest.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\CRS.DAL\CRS.DAL.csproj" />
-    <ProjectReference Include="..\CRS.Entity\CRS.Entity.csproj" />
+    <Compile Include="Interfaces\IAdminService.cs" />
+    <Compile Include="Interfaces\ICourseService.cs" />
+    <Compile Include="Interfaces\IDepartmentService.cs" />
+    <Compile Include="Interfaces\IGenericService.cs" />
+    <Compile Include="Interfaces\IPrerequisiteService.cs" />
+    <Compile Include="Interfaces\IProgramCourseAssociationService.cs" />
+    <Compile Include="Interfaces\IProgramService.cs" />
+    <Compile Include="Interfaces\IStudentCourseAssociationService.cs" />
+    <Compile Include="Interfaces\IStudentService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AdminService.cs" />
+    <Compile Include="Services\CourseService.cs" />
+    <Compile Include="Services\DepartmentService.cs" />
+    <Compile Include="Services\GenericService.cs" />
+    <Compile Include="Services\PrerequisiteService.cs" />
+    <Compile Include="Services\ProgramCourseAssociationService.cs" />
+    <Compile Include="Services\ProgramService.cs" />
+    <Compile Include="Services\StudentCourseAssociationService.cs" />
+    <Compile Include="Services\StudentService.cs" />
   </ItemGroup>
-
+  <ItemGroup>
+    <ProjectReference Include="..\CRS.DAL\CRS.DAL.csproj">
+      <Project>{0e354383-a8dd-40cc-82d0-b170f19f4c39}</Project>
+      <Name>CRS.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CRS.Entity\CRS.Entity.csproj">
+      <Project>{bc402946-6f58-49ee-93d8-81c5d41ce46b}</Project>
+      <Name>CRS.Entity</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
