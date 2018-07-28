@@ -57,7 +57,7 @@ namespace CRS.Web.Controllers
             }
             catch (Exception ex)
             {
-                return View(course);
+                return View(courseViewModel);
             }
         }
 
@@ -85,7 +85,7 @@ namespace CRS.Web.Controllers
             }
             catch (Exception ex)
             {
-                return View(course);
+                return View(courseViewModel);
             }
         }
 
