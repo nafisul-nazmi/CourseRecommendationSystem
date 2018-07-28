@@ -1,4 +1,4 @@
-﻿@model CRS.Entity.Models.Course
+﻿@model CRS.Web.ViewModels.CourseViewModel
 
 @{
     ViewBag.Title = "Course Delete";
@@ -13,35 +13,48 @@
     <dl class="dl-horizontal">
 
         <dt>
-            @Html.DisplayNameFor(model => model.CourseCode)
+            @Html.DisplayNameFor(model => model.Course.CourseCode)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CourseCode)
+            @Html.DisplayFor(model => model.Course.CourseCode)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CourseName)
+            @Html.DisplayNameFor(model => model.Course.CourseName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CourseName)
+            @Html.DisplayFor(model => model.Course.CourseName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CourseCredits)
+            @Html.DisplayNameFor(model => model.Course.CourseCredits)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CourseCredits)
+            @Html.DisplayFor(model => model.Course.CourseCredits)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Department.DepartmentName)
+            @Html.DisplayNameFor(model => model.Course.Department.DepartmentName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Department.DepartmentName)
+            @Html.DisplayFor(model => model.Course.Department.DepartmentName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Prerequisites)
+        </dt>
+
+        <dd>
+            <ul>
+            @foreach(var course in Model.Prerequisites)
+             {
+                 <li>@course.CourseName</li>
+             }
+            </ul>
         </dd>
 
     </dl>

@@ -6,5 +6,7 @@ using System.Text;
 namespace CRS.DAL.Interfaces
 {
     public interface IPrerequisiteRepository : IGenericRepository<Prerequisite>
-    { }
+    {
+        void DeleteCollection(IEnumerable<Prerequisite> prerequisites);
+    }
 }

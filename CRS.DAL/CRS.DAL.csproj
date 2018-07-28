@@ -61,6 +61,18 @@
     <Compile Include="Migrations\201807251857249_Initial.Designer.cs">
       <DependentUpon>201807251857249_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807281709394_PrerequisiteUpdate.cs" />
+    <Compile Include="Migrations\201807281709394_PrerequisiteUpdate.Designer.cs">
+      <DependentUpon>201807281709394_PrerequisiteUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807281725291_CoursePrereqFieldUpdate.cs" />
+    <Compile Include="Migrations\201807281725291_CoursePrereqFieldUpdate.Designer.cs">
+      <DependentUpon>201807281725291_CoursePrereqFieldUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807281813417_PrerequisiteStructureChange.cs" />
+    <Compile Include="Migrations\201807281813417_PrerequisiteStructureChange.Designer.cs">
+      <DependentUpon>201807281813417_PrerequisiteStructureChange.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AdminRepository.cs" />
@@ -86,6 +98,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201807251857249_Initial.resx">
       <DependentUpon>201807251857249_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807281709394_PrerequisiteUpdate.resx">
+      <DependentUpon>201807281709394_PrerequisiteUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807281725291_CoursePrereqFieldUpdate.resx">
+      <DependentUpon>201807281725291_CoursePrereqFieldUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807281813417_PrerequisiteStructureChange.resx">
+      <DependentUpon>201807281813417_PrerequisiteStructureChange.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

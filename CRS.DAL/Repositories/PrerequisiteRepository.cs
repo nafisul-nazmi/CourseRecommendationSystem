@@ -11,5 +11,14 @@ namespace CRS.DAL.Repositories
     {
         public PrerequisiteRepository(DbContext dbContext) : base(dbContext)
         { }
+
+        public void DeleteCollection(IEnumerable<Prerequisite> prerequisites)
+        {
+            foreach(Prerequisite prerequisite in prerequisites)
+            {
+                dbSet.Remove(prerequisite);
+            }
+            dbContext.SaveChanges();
+        }
     }
 }

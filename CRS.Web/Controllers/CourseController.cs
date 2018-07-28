@@ -12,26 +12,45 @@ namespace CRS.Web.Controllers
     public class CourseController : Controller
     {
         private ICourseService courseService;
+        private IPrerequisiteService prerequisiteService;
         private IDepartmentService departmentService;
 
-        public CourseController(ICourseService courseService, IDepartmentService departmentService)
+        public CourseController(ICourseService courseService, IPrerequisiteService prerequisiteService, IDepartmentService departmentService)
         {
             this.courseService = courseService;
+            this.prerequisiteService = prerequisiteService;
             this.departmentService = departmentService;
         }
 
         // GET: Course
         public ActionResult Index()
         {
-            IEnumerable<Course> courses = courseService.GetAll();
-            return View(courses);
+            IEnumerable<Course> courses = courseService.GetAll().ToList();
+            IEnumerable<Prerequisite> prerequisites = prerequisiteService.GetAll().ToList();
+            List<CourseViewModel> courseViewModels = new List<CourseViewModel>();
+            foreach(var course in courses)
+            {
+                CourseViewModel courseViewModel = new CourseViewModel
+                {
+                    Course = course,
+                    Prerequisites = prerequisites.Where(x => x.CourseId == course.Id).Select(x => x.CoursePrerequisite).ToList()
+                };
+                courseViewModels.Add(courseViewModel);
+            }
+            return View(courseViewModels);
         }
 
         // GET: Course/Details/5
         public ActionResult Details(int id)
         {
             Course course = courseService.Get(id);
-            return View(course);
+            IEnumerable<Prerequisite> prerequisites = prerequisiteService.GetAll().ToList();
+            CourseViewModel courseViewModel = new CourseViewModel
+            {
+                Course = course,
+                Prerequisites = prerequisites.Where(x => x.CourseId == course.Id).Select(x => x.CoursePrerequisite).ToList()
+            };
+            return View(courseViewModel);
         }
 
         // GET: Course/Create
@@ -40,7 +59,8 @@ namespace CRS.Web.Controllers
             CourseViewModel courseViewModel = new CourseViewModel
             {
                 Course = new Course(),
-                Departments = departmentService.GetAll()
+                Departments = departmentService.GetAll(),
+                AllCourses = courseService.GetAll()
             };
             return View(courseViewModel);
         }
@@ -50,9 +70,19 @@ namespace CRS.Web.Controllers
         public ActionResult Create(CourseViewModel courseViewModel)
         {
             Course course = courseViewModel.Course;
+            IEnumerable<int> prerequisites = courseViewModel.PrerequisiteIds;
             try
             {
-                courseService.Add(course);
+                course = courseService.Add(course);
+                foreach(int prerequisiteId in prerequisites)
+                {
+                    Prerequisite prerequisite = new Prerequisite
+                    {
+                        CourseId = course.Id,
+                        CoursePrerequisiteId = prerequisiteId
+                    };
+                    prerequisiteService.Add(prerequisite);
+                }
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
@@ -65,10 +95,13 @@ namespace CRS.Web.Controllers
         public ActionResult Edit(int id)
         {
             Course course = courseService.Get(id);
+            IEnumerable<Prerequisite> prerequisites = prerequisiteService.GetAll().ToList();
             CourseViewModel courseViewModel = new CourseViewModel
             {
                 Course = course,
-                Departments = departmentService.GetAll()
+                Departments = departmentService.GetAll(),
+                AllCourses = courseService.GetAll(),
+                PrerequisiteIds = prerequisites.Where(x => x.CourseId == course.Id).Select(x => x.CoursePrerequisiteId.Value).ToList()
             };
             return View(courseViewModel);
         }
@@ -78,9 +111,23 @@ namespace CRS.Web.Controllers
         public ActionResult Edit(int id, CourseViewModel courseViewModel)
         {
             Course course = courseViewModel.Course;
+            IEnumerable<int> prerequisites = courseViewModel.PrerequisiteIds;
             try
             {
+                prerequisiteService.DeletePrequisiteByCourse(course.Id);
                 courseService.Edit(course);
+                if(prerequisites != null)
+                {
+                    foreach (int prerequisiteId in prerequisites)
+                    {
+                        Prerequisite prerequisite = new Prerequisite
+                        {
+                            CourseId = course.Id,
+                            CoursePrerequisiteId = prerequisiteId
+                        };
+                        prerequisiteService.Add(prerequisite);
+                    }
+                }  
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
@@ -93,7 +140,13 @@ namespace CRS.Web.Controllers
         public ActionResult Delete(int id)
         {
             Course course = courseService.Get(id);
-            return View(course);
+            IEnumerable<Prerequisite> prerequisites = prerequisiteService.GetAll().ToList();
+            CourseViewModel courseViewModel = new CourseViewModel
+            {
+                Course = course,
+                Prerequisites = prerequisites.Where(x => x.CourseId == course.Id).Select(x => x.CoursePrerequisite).ToList()
+            };
+            return View(courseViewModel);
         }
 
         // POST: Course/Delete/5
@@ -104,6 +157,7 @@ namespace CRS.Web.Controllers
             Course course = courseService.Get(id);
             try
             {
+                prerequisiteService.DeleteAllByCourse(course.Id);
                 courseService.Delete(course);
                 return RedirectToAction("Index");
             }
