@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0E354383-A8DD-40CC-82D0-B170F19F4C39}</ProjectGuid>
+    <ProjectGuid>{28E76519-8B1E-4B13-9E39-D5399E6439CF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CRS.DAL</RootNamespace>
