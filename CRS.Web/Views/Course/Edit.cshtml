@@ -52,7 +52,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Prerequisites, "Prerequisites", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.ListBoxFor(model => model.PrerequisiteIds, new MultiSelectList(Model.AllCourses, "Id", "CourseName", Model.PrerequisiteIds), new { @class = "form-control", id = "course-drop-down" })
+                @Html.ListBoxFor(model => model.PrerequisiteIds, new MultiSelectList(Model.AllCourses.Except(Model.AllCourses.Where(x => x.Id == Model.Course.Id)), "Id", "CourseName", Model.PrerequisiteIds), new { @class = "form-control", id = "course-drop-down" })
             </div>
         </div>
 
