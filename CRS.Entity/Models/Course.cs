@@ -21,7 +21,6 @@ namespace CRS.Entity.Models
         // Navigation properties
         [ForeignKey("DepartmentId")]
         public virtual Department Department { get; set; }
-        public virtual ICollection<Prerequisite> Prerequisites { get; set; }
         public virtual ICollection<ProgramCourseAssociation> ProgramCourseAssociations { get; set; }
         public virtual ICollection<StudentCourseAssociation> StudentCourseAssociations { get; set; }
     }

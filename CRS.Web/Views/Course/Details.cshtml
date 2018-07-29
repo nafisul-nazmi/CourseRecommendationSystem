@@ -1,0 +1,64 @@
+﻿@model CRS.Web.ViewModels.CourseViewModel
+
+@{
+    ViewBag.Title = "Course Details";
+}
+
+<h2>Course Details</h2>
+
+<div>
+    <h4>Course</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Course.CourseCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Course.CourseCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Course.CourseName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Course.CourseName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Course.CourseCredits)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Course.CourseCredits)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Course.Department.DepartmentName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Course.Department.DepartmentName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Prerequisites)
+        </dt>
+
+        <dd>
+            <ul>
+            @foreach(var course in Model.Prerequisites)
+             {
+                 <li>@course.CourseName</li>
+             }
+            </ul>
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Course.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

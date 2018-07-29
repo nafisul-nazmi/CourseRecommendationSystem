@@ -13,8 +13,8 @@ namespace CRS.Entity.Models
         [Column("PrerequisiteId")]
         [Key]
         public override int Id { get; set; }
-        public int CourseId { get; set; }
-        public int CoursePrerequisiteId { get; set; }
+        public int? CourseId { get; set; }
+        public int? CoursePrerequisiteId { get; set; }
 
         // Navigation properties
         [ForeignKey("CourseId")]

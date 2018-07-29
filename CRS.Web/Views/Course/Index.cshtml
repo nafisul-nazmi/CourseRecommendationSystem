@@ -1,0 +1,63 @@
+﻿@model IEnumerable<CRS.Web.ViewModels.CourseViewModel>
+
+@{
+    ViewBag.Title = "Course Index";
+}
+
+<h2>Course Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Course.CourseCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Course.CourseName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Course.CourseCredits)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Prerequisites)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Course.Department.DepartmentName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Course.CourseCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Course.CourseName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Course.CourseCredits)
+        </td>
+        <td>
+            <ul class="list-group">
+            @foreach(var course in item.Prerequisites)
+             {
+                 <li class="list-group-item">@course.CourseName</li>
+             }
+            </ul>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Course.Department.DepartmentName)
+        </td>
+        
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Course.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Course.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Course.Id })
+        </td>
+    </tr>
+}
+
+</table>

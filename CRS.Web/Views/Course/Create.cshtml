@@ -1,0 +1,105 @@
+﻿@model CRS.Web.ViewModels.CourseViewModel
+
+@{
+    ViewBag.Title = "Course Create";
+}
+
+<h2>Course Create</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Course</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Course.CourseCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Course.CourseCode, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Course.CourseCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Course.CourseName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Course.CourseName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Course.CourseName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Course.CourseCredits, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Course.CourseCredits, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Course.CourseCredits, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Course.DepartmentId, "Department", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @{
+                    List<SelectListItem> selectListItemsDepartment = new List<SelectListItem>();
+                    foreach (var department in Model.Departments)
+                    {
+                        SelectListItem selectListItem = new SelectListItem
+                        {
+                            Text = department.DepartmentName,
+                            Value = department.Id.ToString()
+                        };
+                        selectListItemsDepartment.Add(selectListItem);
+                    }
+                }
+                @Html.DropDownList("Course.DepartmentId", selectListItemsDepartment, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Course.DepartmentId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Prerequisites, "Prerequisites", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @{
+                    List<SelectListItem> selectListItemsCourse = new List<SelectListItem>();
+                    foreach (var course in Model.AllCourses)
+                    {
+                        SelectListItem selectListItem = new SelectListItem
+                        {
+                            Text = course.CourseName,
+                            Value = course.Id.ToString()
+                        };
+                        selectListItemsCourse.Add(selectListItem);
+                    }
+                }
+                @Html.DropDownList("PrerequisiteIds", selectListItemsCourse, htmlAttributes: new { @class = "form-control", @multiple = "multiple", @id = "course-drop-down" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/select2.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#course-drop-down").select2();
+        });
+    </script>
+}
+
+@section Styles {
+    <link href="~/Content/css/select2.css" rel="stylesheet" />
+}
