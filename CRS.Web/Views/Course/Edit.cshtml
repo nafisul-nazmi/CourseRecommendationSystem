@@ -68,23 +68,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Prerequisites, "Prerequisites", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @{
-                    List<SelectListItem> selectListItemsCourse = new List<SelectListItem>();
-                    foreach (var course in Model.AllCourses)
-                    {
-                        SelectListItem selectListItem = new SelectListItem
-                        {
-                            Text = course.CourseName,
-                            Value = course.Id.ToString()
-                        };
-                        if (Model.PrerequisiteIds.Contains(course.Id))
-                        {
-                            selectListItem.Selected = true;
-                        }
-                        selectListItemsCourse.Add(selectListItem);
-                    }
-                }
-                @Html.DropDownList("PrerequisiteIds", selectListItemsCourse, htmlAttributes: new { @class = "form-control", @multiple = "multiple", @id = "course-drop-down" })
+                @Html.ListBoxFor(model => model.PrerequisiteIds, new MultiSelectList(Model.AllCourses, "Id", "CourseName", Model.PrerequisiteIds), new { @class = "form-control", id = "course-drop-down" })
             </div>
         </div>
 
