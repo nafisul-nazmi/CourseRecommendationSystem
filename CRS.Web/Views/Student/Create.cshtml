@@ -50,19 +50,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Student.ProgramId, "Program", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @{ 
-                    List<SelectListItem> selectListItems = new List<SelectListItem>();
-                    foreach(var program in Model.Programs)
-                    {
-                        SelectListItem selectListItem = new SelectListItem
-                        {
-                            Text = program.ProgramName,
-                            Value = program.Id.ToString()
-                        };
-                        selectListItems.Add(selectListItem);
-                    }
-                }
-                @Html.DropDownList("Student.ProgramId", selectListItems, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("Student.ProgramId", new SelectList(Model.Programs, "Id", "ProgramName"), htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Student.ProgramId, "", new { @class = "text-danger" })
             </div>
         </div>
