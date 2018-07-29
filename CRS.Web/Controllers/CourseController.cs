@@ -74,15 +74,18 @@ namespace CRS.Web.Controllers
             try
             {
                 course = courseService.Add(course);
-                foreach(int prerequisiteId in prerequisites)
+                if(prerequisites != null)
                 {
-                    Prerequisite prerequisite = new Prerequisite
+                    foreach (int prerequisiteId in prerequisites)
                     {
-                        CourseId = course.Id,
-                        CoursePrerequisiteId = prerequisiteId
-                    };
-                    prerequisiteService.Add(prerequisite);
-                }
+                        Prerequisite prerequisite = new Prerequisite
+                        {
+                            CourseId = course.Id,
+                            CoursePrerequisiteId = prerequisiteId
+                        };
+                        prerequisiteService.Add(prerequisite);
+                    }
+                } 
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
