@@ -3,32 +3,32 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="~/Content/favicon.ico" />
     <title>@ViewBag.Title - Course Recommendation System</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @RenderSection("styles", required: false)
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-expand-sm navbar-dark fixed-top bg-dark">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"></button>
+            @Html.ActionLink("Course Recommendation System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <div class="navbar-collapse collapse" id="navbarSupportedContent">
+                <ul class="nav navbar-nav mr-auto">
+                    <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link"})</li>
+                    <li class="nav-item">@Html.ActionLink("Departments", "Index", "Department", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Programs", "Index", "Program", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Courses", "Index", "Course", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Students", "Index", "Student", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Admins", "Index", "Admin", null, new { @class = "nav-link" })</li>
                 </ul>
             </div>
         </div>
-    </div>
+    </nav>
     <div class="container body-content">
+        <br />
+        <br />
         @RenderBody()
         <hr />
         <footer>

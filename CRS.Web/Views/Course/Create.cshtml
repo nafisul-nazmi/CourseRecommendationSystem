@@ -42,19 +42,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Course.DepartmentId, "Department", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @{
-                    List<SelectListItem> selectListItemsDepartment = new List<SelectListItem>();
-                    foreach (var department in Model.Departments)
-                    {
-                        SelectListItem selectListItem = new SelectListItem
-                        {
-                            Text = department.DepartmentName,
-                            Value = department.Id.ToString()
-                        };
-                        selectListItemsDepartment.Add(selectListItem);
-                    }
-                }
-                @Html.DropDownList("Course.DepartmentId", selectListItemsDepartment, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("Course.DepartmentId", new SelectList(Model.Departments, "Id", "DepartmentName"), htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Course.DepartmentId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -62,19 +50,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Prerequisites, "Prerequisites", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @{
-                    List<SelectListItem> selectListItemsCourse = new List<SelectListItem>();
-                    foreach (var course in Model.AllCourses)
-                    {
-                        SelectListItem selectListItem = new SelectListItem
-                        {
-                            Text = course.CourseName,
-                            Value = course.Id.ToString()
-                        };
-                        selectListItemsCourse.Add(selectListItem);
-                    }
-                }
-                @Html.DropDownList("PrerequisiteIds", selectListItemsCourse, htmlAttributes: new { @class = "form-control", @multiple = "multiple", @id = "course-drop-down" })
+                @Html.ListBoxFor(model => model.PrerequisiteIds, new MultiSelectList(Model.AllCourses, "Id", "CourseName"), new { @class = "form-control", id = "course-drop-down" })
             </div>
         </div>
 
