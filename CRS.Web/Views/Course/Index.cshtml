@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CRS.Web.ViewModels.CourseViewModel>
+﻿@model IEnumerable<CRS.Entity.Models.Course>
 
 @{
     ViewBag.Title = "Course Index";
@@ -14,19 +14,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Course.CourseCode)
+                @Html.DisplayNameFor(model => model.CourseCode)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Course.CourseName)
+                @Html.DisplayNameFor(model => model.CourseName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Course.CourseCredits)
+                @Html.DisplayNameFor(model => model.CourseCredits)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Prerequisites)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Course.Department.DepartmentName)
+                @Html.DisplayNameFor(model => model.Department.DepartmentName)
             </th>
             <th>
                 Actions
@@ -38,30 +35,22 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Course.CourseCode)
+                    @Html.DisplayFor(modelItem => item.CourseCode)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Course.CourseName)
+                    @Html.DisplayFor(modelItem => item.CourseName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Course.CourseCredits)
+                    @Html.DisplayFor(modelItem => item.CourseCredits)
                 </td>
                 <td>
-                    <ul class="list-group">
-                        @foreach (var course in item.Prerequisites)
-                        {
-                            <li class="list-group-item">@course.CourseName</li>
-                        }
-                    </ul>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Course.Department.DepartmentName)
+                    @Html.DisplayFor(modelItem => item.Department.DepartmentName)
                 </td>
 
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Course.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Course.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Course.Id })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                 </td>
             </tr>
         }
@@ -76,7 +65,6 @@
             $("#course-table").DataTable({
                 "lengthMenu": [[10, 20, 50, 100, -1], [10, 20, 50, 100, "All"]],
                 "columns": [
-                    null,
                     null,
                     null,
                     null,

@@ -26,18 +26,7 @@ namespace CRS.Web.Controllers
         public ActionResult Index()
         {
             IEnumerable<Course> courses = courseService.GetAll().ToList();
-            IEnumerable<Prerequisite> prerequisites = prerequisiteService.GetAll().ToList();
-            List<CourseViewModel> courseViewModels = new List<CourseViewModel>();
-            foreach(var course in courses)
-            {
-                CourseViewModel courseViewModel = new CourseViewModel
-                {
-                    Course = course,
-                    Prerequisites = prerequisites.Where(x => x.CourseId == course.Id).Select(x => x.CoursePrerequisite).ToList()
-                };
-                courseViewModels.Add(courseViewModel);
-            }
-            return View(courseViewModels);
+            return View(courses);
         }
 
         // GET: Course/Details/5
