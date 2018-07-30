@@ -1,0 +1,43 @@
+﻿@model CRS.Entity.Models.StudentCourseAssociation
+
+@{
+    ViewBag.Title = " Details";
+}
+
+<h2>Enrollment Details</h2>
+
+<div>
+    <h4>StudentCourseAssociation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            StudentId
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Student.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Course.CourseName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Course.CourseName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Marks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Marks)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
