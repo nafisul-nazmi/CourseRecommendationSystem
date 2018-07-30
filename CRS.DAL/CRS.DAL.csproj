@@ -58,6 +58,7 @@
     <Compile Include="Interfaces\IProgramRepository.cs" />
     <Compile Include="Interfaces\IStudentCourseAssociationRepository.cs" />
     <Compile Include="Interfaces\IStudentRepository.cs" />
+    <Compile Include="Interfaces\IWarehouseRepository.cs" />
     <Compile Include="Migrations\201807251857249_Initial.cs" />
     <Compile Include="Migrations\201807251857249_Initial.Designer.cs">
       <DependentUpon>201807251857249_Initial.cs</DependentUpon>
@@ -78,6 +79,10 @@
     <Compile Include="Migrations\201807301115589_ExamScheduleAdd.Designer.cs">
       <DependentUpon>201807301115589_ExamScheduleAdd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807302208279_WarehouseAdd.cs" />
+    <Compile Include="Migrations\201807302208279_WarehouseAdd.Designer.cs">
+      <DependentUpon>201807302208279_WarehouseAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AdminRepository.cs" />
@@ -90,6 +95,7 @@
     <Compile Include="Repositories\ProgramRepository.cs" />
     <Compile Include="Repositories\StudentCourseAssociationRepository.cs" />
     <Compile Include="Repositories\StudentRepository.cs" />
+    <Compile Include="Repositories\WarehouseRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CRS.Entity\CRS.Entity.csproj">
@@ -116,6 +122,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807301115589_ExamScheduleAdd.resx">
       <DependentUpon>201807301115589_ExamScheduleAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807302208279_WarehouseAdd.resx">
+      <DependentUpon>201807302208279_WarehouseAdd.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
