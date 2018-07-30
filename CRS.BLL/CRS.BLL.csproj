@@ -58,6 +58,7 @@
     <Compile Include="Interfaces\IAdminService.cs" />
     <Compile Include="Interfaces\ICourseService.cs" />
     <Compile Include="Interfaces\IDepartmentService.cs" />
+    <Compile Include="Interfaces\IExamScheduleService.cs" />
     <Compile Include="Interfaces\IGenericService.cs" />
     <Compile Include="Interfaces\IPrerequisiteService.cs" />
     <Compile Include="Interfaces\IProgramCourseAssociationService.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="Services\AdminService.cs" />
     <Compile Include="Services\CourseService.cs" />
     <Compile Include="Services\DepartmentService.cs" />
+    <Compile Include="Services\ExamScheduleService.cs" />
     <Compile Include="Services\GenericService.cs" />
     <Compile Include="Services\PrerequisiteService.cs" />
     <Compile Include="Services\ProgramCourseAssociationService.cs" />

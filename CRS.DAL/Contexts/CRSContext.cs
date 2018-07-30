@@ -20,6 +20,6 @@ namespace CRS.DAL.Contexts
         public DbSet<ProgramCourseAssociation> ProgramCourseAssociations { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<StudentCourseAssociation> StudentCourseAssociations { get; set; }
-
+        public DbSet<ExamSchedule> ExamSchedules { get; set; }
     }
 }

@@ -51,6 +51,7 @@
     <Compile Include="Interfaces\IAdminRepository.cs" />
     <Compile Include="Interfaces\ICourseRepository.cs" />
     <Compile Include="Interfaces\IDepartmentRepository.cs" />
+    <Compile Include="Interfaces\IExamScheduleRepository.cs" />
     <Compile Include="Interfaces\IGenericRepository.cs" />
     <Compile Include="Interfaces\IPrerequisiteRepository.cs" />
     <Compile Include="Interfaces\IProgramCourseAssociationRepository.cs" />
@@ -73,11 +74,16 @@
     <Compile Include="Migrations\201807281813417_PrerequisiteStructureChange.Designer.cs">
       <DependentUpon>201807281813417_PrerequisiteStructureChange.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807301115589_ExamScheduleAdd.cs" />
+    <Compile Include="Migrations\201807301115589_ExamScheduleAdd.Designer.cs">
+      <DependentUpon>201807301115589_ExamScheduleAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AdminRepository.cs" />
     <Compile Include="Repositories\CourseRepository.cs" />
     <Compile Include="Repositories\DepartmentRepository.cs" />
+    <Compile Include="Repositories\ExamScheduleRepository.cs" />
     <Compile Include="Repositories\GenericRepository.cs" />
     <Compile Include="Repositories\PrerequisiteRepository.cs" />
     <Compile Include="Repositories\ProgramCourseAssociationRepository.cs" />
@@ -107,6 +113,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807281813417_PrerequisiteStructureChange.resx">
       <DependentUpon>201807281813417_PrerequisiteStructureChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807301115589_ExamScheduleAdd.resx">
+      <DependentUpon>201807301115589_ExamScheduleAdd.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
