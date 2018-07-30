@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace CRS.Web.Controllers
 {
-    public class AdminController : Controller
+    public class AdminController : AdminSecuredController
     {
         private IAdminService adminService;
 

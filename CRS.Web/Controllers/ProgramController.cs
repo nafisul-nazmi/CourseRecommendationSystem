@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace CRS.Web.Controllers
 {
-    public class ProgramController : Controller
+    public class ProgramController : AdminSecuredController
     {
         private IProgramService programService;
         private IDepartmentService departmentService;

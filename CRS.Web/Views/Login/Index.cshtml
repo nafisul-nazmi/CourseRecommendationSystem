@@ -1,0 +1,26 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" href="~/Content/favicon.ico" />
+    <title>Login - Course Recommendation System</title>
+</head>
+<body>
+    <div>
+        <form method="POST">
+            <span>@ViewBag.ErrorMessage</span>
+            <br />
+            <label>Email: </label>
+            <input type="email" required name="Email"/> <br />
+            <label>Password:</label>
+            <input type="password" required name="Password"/> <br />
+            <input type="submit" value="Login"/>
+        </form>
+    </div>
+</body>
+</html>

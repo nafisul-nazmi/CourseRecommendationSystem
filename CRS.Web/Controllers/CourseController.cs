@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace CRS.Web.Controllers
 {
-    public class CourseController : Controller
+    public class CourseController : AdminSecuredController
     {
         private ICourseService courseService;
         private IPrerequisiteService prerequisiteService;
