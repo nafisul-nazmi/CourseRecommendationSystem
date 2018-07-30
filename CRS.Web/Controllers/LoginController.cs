@@ -1,4 +1,5 @@
 ﻿using CRS.BLL.Interfaces;
+using CRS.Entity.Models;
 using CRS.Web.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,14 @@ namespace CRS.Web.Controllers
         {
             if(Session["User"] != null)
             {
-                return RedirectToAction("Index", "Home");
+                if((Session["User"] as Admin) != null)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else if((Session["User"] as Student) != null)
+                {
+                    return RedirectToAction("Index", "StudentHome");
+                }
             }
             return View();
         }
@@ -43,7 +51,7 @@ namespace CRS.Web.Controllers
             else if(student != null)
             {
                 Session["User"] = student;
-                return RedirectToAction("NOT IMPLEMENTED");
+                return RedirectToAction("Index", "StudentHome");
             }
             else
             {

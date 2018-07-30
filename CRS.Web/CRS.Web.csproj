@@ -199,6 +199,8 @@
     <Compile Include="Controllers\ProgramController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\StudentCourseAssociationController.cs" />
+    <Compile Include="Controllers\StudentHomeController.cs" />
+    <Compile Include="Controllers\StudentSecuredController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -589,8 +591,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
@@ -638,11 +638,12 @@
     <Content Include="Views\ExamSchedule\Edit.cshtml" />
     <Content Include="Views\ExamSchedule\Delete.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Shared\_StudentLayout.cshtml" />
+    <Content Include="Views\StudentHome\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\AdminSecured\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

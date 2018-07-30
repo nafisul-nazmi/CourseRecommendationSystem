@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace CRS.Web.Controllers
 {
-    public class HomeController : AdminSecuredController
+    public class StudentHomeController : StudentSecuredController
     {
         public ActionResult Index()
         {
