@@ -1,32 +1,42 @@
-@model IEnumerable<CRS.Entity.Models.Department>
+﻿@model IEnumerable<CRS.Entity.Models.ExamSchedule>
 
 @{
-    ViewBag.Title = "Department Index";
+    ViewBag.Title = "Exam Schedule Index";
 }
 
-<h2>Department Index</h2>
+<h2>Exam Schedule Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 
-<table class="table" id="department-table">
+<table class="table" id="exam-schedule-table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.DepartmentName)
+                @Html.DisplayNameFor(model => model.Course.CourseName)
             </th>
             <th>
-                Actions
+                @Html.DisplayNameFor(model => model.Day)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Slot)
+            </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
-         {
+        {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DepartmentName)
+                    @Html.DisplayFor(modelItem => item.Course.CourseName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Day)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Slot)
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
@@ -34,7 +44,7 @@
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                 </td>
             </tr>
-         }
+        }
     </tbody>
 
 </table>
@@ -43,9 +53,11 @@
     <script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
     <script>
         $(document).ready(function () {
-            $("#department-table").DataTable({
+            $("#exam-schedule-table").DataTable({
                 "lengthMenu": [[10, 20, 50, 100, -1], [10, 20, 50, 100, "All"]],
                 "columns": [
+                    null,
+                    null,
                     null,
                     {
                         "searchable": false,
