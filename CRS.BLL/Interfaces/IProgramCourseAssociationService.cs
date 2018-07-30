@@ -6,5 +6,7 @@ using System.Text;
 namespace CRS.BLL.Interfaces
 {
     public interface IProgramCourseAssociationService : IGenericService<ProgramCourseAssociation>
-    { }
+    {
+        void DeleteAssociationByProgram(int programId);
+    }
 }

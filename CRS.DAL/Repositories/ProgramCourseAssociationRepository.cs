@@ -11,5 +11,14 @@ namespace CRS.DAL.Repositories
     {
         public ProgramCourseAssociationRepository(DbContext dbContext) : base(dbContext)
         { }
+
+        public void DeleteCollection(IEnumerable<ProgramCourseAssociation> programCourseAssociations)
+        {
+            foreach(var programCourseAssociation in programCourseAssociations)
+            {
+                dbSet.Remove(programCourseAssociation);
+            }
+            dbContext.SaveChanges();
+        }
     }
 }

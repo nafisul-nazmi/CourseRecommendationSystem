@@ -6,5 +6,7 @@ using System.Text;
 namespace CRS.DAL.Interfaces
 {
     public interface IProgramCourseAssociationRepository : IGenericRepository<ProgramCourseAssociation>
-    { }
+    {
+        void DeleteCollection(IEnumerable<ProgramCourseAssociation> programCourseAssociations);
+    }
 }

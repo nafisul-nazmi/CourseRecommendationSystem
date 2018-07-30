@@ -13,11 +13,15 @@ namespace CRS.Web.Controllers
     {
         private IProgramService programService;
         private IDepartmentService departmentService;
+        private ICourseService courseService;
+        private IProgramCourseAssociationService programCourseAssociationService;
 
-        public ProgramController(IProgramService programService, IDepartmentService departmentService)
+        public ProgramController(IProgramService programService, IDepartmentService departmentService, ICourseService courseService, IProgramCourseAssociationService programCourseAssociationService)
         {
             this.programService = programService;
             this.departmentService = departmentService;
+            this.courseService = courseService;
+            this.programCourseAssociationService = programCourseAssociationService;
         }
 
         // GET: Program
@@ -40,7 +44,8 @@ namespace CRS.Web.Controllers
             ProgramViewModel programViewModel = new ProgramViewModel
             {
                 Program = new Program(),
-                Departments = departmentService.GetAll()
+                Departments = departmentService.GetAll(),
+                Courses = courseService.GetAll()
             };
             return View(programViewModel);
         }
@@ -50,9 +55,22 @@ namespace CRS.Web.Controllers
         public ActionResult Create(ProgramViewModel programViewModel)
         {
             Program program = programViewModel.Program;
+            IEnumerable<int> courseIds = programViewModel.CourseIds;
             try
             {
-                programService.Add(program);
+                program = programService.Add(program);
+                if(courseIds != null)
+                {
+                    foreach (int courseId in courseIds)
+                    {
+                        ProgramCourseAssociation programCourseAssociation = new ProgramCourseAssociation
+                        {
+                            ProgramId = program.Id,
+                            CourseId = courseId
+                        };
+                        programCourseAssociationService.Add(programCourseAssociation);
+                    }
+                }
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
@@ -68,7 +86,8 @@ namespace CRS.Web.Controllers
             ProgramViewModel programViewModel = new ProgramViewModel
             {
                 Program = program,
-                Departments = departmentService.GetAll()
+                Departments = departmentService.GetAll(),
+                Courses = courseService.GetAll()
             };
             return View(programViewModel);
         }
@@ -78,9 +97,23 @@ namespace CRS.Web.Controllers
         public ActionResult Edit(int id, ProgramViewModel programViewModel)
         {
             Program program = programViewModel.Program;
+            IEnumerable<int> courseIds = programViewModel.CourseIds;
             try
             {
+                programCourseAssociationService.DeleteAssociationByProgram(program.Id);
                 programService.Edit(program);
+                if(courseIds != null)
+                {
+                    foreach (int courseId in courseIds)
+                    {
+                        ProgramCourseAssociation programCourseAssociation = new ProgramCourseAssociation
+                        {
+                            ProgramId = program.Id,
+                            CourseId = courseId
+                        };
+                        programCourseAssociationService.Add(programCourseAssociation);
+                    }
+                }
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
@@ -104,6 +137,7 @@ namespace CRS.Web.Controllers
             Program program = programService.Get(id);
             try
             {
+                programCourseAssociationService.DeleteAssociationByProgram(program.Id);
                 programService.Delete(program);
                 return RedirectToAction("Index");
             }
