@@ -15,19 +15,19 @@
         </div>
         <div class="form-group">
             <label class="control-label">Avoid Retakeable Subject?</label>
-            <input type="checkbox" name="AvoidRetakeable" class="form-control" />
+            @Html.CheckBoxFor(m => m.AvoidRetakeable, new { @class="form-control"})
         </div>
         <div class="form-group">
             <label class="control-label">Avoid Clash Exams?</label>
-            <input type="checkbox" name="AvoidTwoExamsInADay" class="form-control" />
+            @Html.CheckBoxFor(m => m.AvoidClashExams, new { @class = "form-control" })
         </div>
         <div class="form-group">
             <label class="control-label">Avoid 2 Exams In A Day?</label>
-            <input type="checkbox" name="AvoidTwoExamsInADay" class="form-control" />
+            @Html.CheckBoxFor(m => m.AvoidTwoExamsInADay, new { @class = "form-control" })
         </div>
         <div class="form-group">
             <label class="control-label">Avoid 3 Exams In A Day?</label>
-            <input type="checkbox" name="AvoidClashExams" class="form-control" />
+            @Html.CheckBoxFor(m => m.AvoidThreeExamsInADay, new { @class = "form-control" })
         </div>
         <div class="form-group">
             <input type="submit" value="Get Recommendation" class="form-control" />

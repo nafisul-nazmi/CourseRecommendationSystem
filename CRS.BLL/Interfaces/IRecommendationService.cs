@@ -9,7 +9,6 @@ namespace CRS.BLL.Interfaces
 {
     public interface IRecommendationService
     {
-        IEnumerable<Course> GetUnlockedCourses(int studentId);
-        IEnumerable<Course> GetRetakeAbleCourses(int studentId);
+        List<Course> GetRecommendation(int studentId, FilterModel filterModel);
     }
 }

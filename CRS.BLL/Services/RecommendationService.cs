@@ -1,5 +1,7 @@
 ﻿using CRS.BLL.Interfaces;
+using CRS.BLL.Utilities;
 using CRS.Entity.Models;
+using SharpLearning.RandomForest.Learners;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +35,71 @@ namespace CRS.BLL.Services
             numberOfTrees = 10;
         }
 
-        public IEnumerable<Course> GetUnlockedCourses(int studentId)
+        public List<Course> GetRecommendation(int studentId, FilterModel filterModel)
+        {
+            var availableCourses = GetUnlockedCourses(studentId).ToList();
+            if(!filterModel.AvoidRetakeable)
+            {
+                availableCourses = availableCourses.Union(GetRetakeAbleCourses(studentId)).ToList();
+            }
+            var courseCombinations = CombinationGenerator.GetAllCombinations<Course>(availableCourses);
+            courseCombinations = GetValidCreditCourseCombinations(courseCombinations, filterModel.NumberOfCredits);
+            if(filterModel.AvoidClashExams)
+            {
+                courseCombinations = GetNoClashExamsCombinations(courseCombinations);
+            }
+            if(filterModel.AvoidTwoExamsInADay)
+            {
+                courseCombinations = GetNoMultipleExamsInADayCombinations(courseCombinations, 2);
+            }
+            if (filterModel.AvoidThreeExamsInADay)
+            {
+                courseCombinations = GetNoMultipleExamsInADayCombinations(courseCombinations, 3);
+            }
+            //return courseCombinations;
+            return null;
+        }
+
+        private List<List<Course>> GetValidCreditCourseCombinations(List<List<Course>> courseCombinations, double numberOfCredits)
+        {
+            List<List<Course>> filteredCourses = new List<List<Course>>();
+            foreach(var courseCombination in courseCombinations)
+            {
+                if(IsNumberOfCreditsValid(courseCombination, numberOfCredits))
+                {
+                    filteredCourses.Add(courseCombination);
+                }
+            }
+            return filteredCourses;
+        }
+
+        private List<List<Course>> GetNoClashExamsCombinations(List<List<Course>> courseCombinations)
+        {
+            List<List<Course>> filteredCourses = new List<List<Course>>();
+            foreach (var courseCombination in courseCombinations)
+            {
+                if (!IsClashExamPresent(courseCombination))
+                {
+                    filteredCourses.Add(courseCombination);
+                }
+            }
+            return filteredCourses;
+        }
+
+        private List<List<Course>> GetNoMultipleExamsInADayCombinations(List<List<Course>> courseCombinations, int numberOfExams = 2)
+        {
+            List<List<Course>> filteredCourses = new List<List<Course>>();
+            foreach (var courseCombination in courseCombinations)
+            {
+                if (!IsMultipleExamPresent(courseCombination, numberOfExams))
+                {
+                    filteredCourses.Add(courseCombination);
+                }
+            }
+            return filteredCourses;
+        }
+
+        private IEnumerable<Course> GetUnlockedCourses(int studentId)
         {
             var completedCourses = studentCourseAssociationService.FindBy(x => x.StudentId == studentId).Select(x => x.Course).ToList();
             var studentProgram = studentService.Get(studentId).Program;
@@ -67,12 +133,12 @@ namespace CRS.BLL.Services
             return unlockedCourses;
         }
 
-        public IEnumerable<Course> GetRetakeAbleCourses(int studentId)
+        private IEnumerable<Course> GetRetakeAbleCourses(int studentId)
         {
             return studentCourseAssociationService.FindBy(x => x.StudentId == studentId && x.Marks <= retakeAbleMark).Select(x => x.Course).ToList();
         }
 
-        public bool IsClashExamPresent(IEnumerable<Course> courses)
+        private bool IsClashExamPresent(IEnumerable<Course> courses)
         {
             int[,] slot = new int[6, 3];
             foreach(var course in courses)
@@ -96,7 +162,7 @@ namespace CRS.BLL.Services
             return false;
         }
 
-        public bool IsMultipleExamPresent(IEnumerable<Course> courses, int numberOfExams = 2)
+        private bool IsMultipleExamPresent(IEnumerable<Course> courses, int numberOfExams = 2)
         {
             int[] days = new int[6];
             foreach (var course in courses)
@@ -117,7 +183,7 @@ namespace CRS.BLL.Services
             return false;
         }
 
-        public bool IsNumberOfCreditsValid(IEnumerable<Course> courses, double numberOfCredits)
+        private bool IsNumberOfCreditsValid(IEnumerable<Course> courses, double numberOfCredits)
         {
             double totalCredits = courses.Select(x => x.CourseCredits).Sum();
             if(totalCredits == numberOfCredits)
@@ -126,5 +192,6 @@ namespace CRS.BLL.Services
             }
             return false;
         }
+
     }
 }

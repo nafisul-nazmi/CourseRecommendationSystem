@@ -25,8 +25,8 @@ namespace CRS.Web.Controllers
         [HttpPost]
         public ActionResult Index(FilterModel filterModel)
         {
-
-            throw new NotImplementedException();
+            int studentId = (Session["User"] as Student).Id;
+            return View();
         }
     }
 }
