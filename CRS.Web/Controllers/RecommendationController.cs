@@ -26,7 +26,9 @@ namespace CRS.Web.Controllers
         public ActionResult Index(FilterModel filterModel)
         {
             int studentId = (Session["User"] as Student).Id;
-            return View();
+            var courses = recommendationService.GetRecommendation(studentId, filterModel);
+            ViewBag.Courses = courses;
+            return View(filterModel);
         }
     }
 }

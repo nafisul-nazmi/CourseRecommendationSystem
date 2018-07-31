@@ -1,0 +1,113 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CRS.Entity.Models
+{
+    public class WarehousePredict
+    {
+        public double PerviousCGPA { get; set; }
+
+        // List of subjects for CS Students
+        public bool? BusinessMath1 { get; set; } = false;
+        public bool? BasicsInNaturalScience { get; set; } = false;
+        public bool? EnglishReadingSkillsAndPublicSpeaking { get; set; } = false;
+        public bool? BusinessMath2 { get; set; } = false;
+        public bool? EnglishWritingSkillsAndCommunication { get; set; } = false;
+        public bool? PrinciplesOfAccounting { get; set; } = false;
+        public bool? PrinciplesOfManagement { get; set; } = false;
+        public bool? ManagementInformationSystem { get; set; } = false;
+        public bool? BusinessCommunications { get; set; } = false;
+        public bool? PrinciplesOfEconomics { get; set; } = false;
+        public bool? PrinciplesOfMarketing { get; set; } = false;
+        public bool? BusinessStatistics { get; set; } = false;
+        public bool? ComputerUtilizationInBusiness { get; set; } = false;
+        public bool? DecisionSupportSystem { get; set; } = false;
+        public bool? GlobalInformationTechnologyManagement { get; set; } = false;
+        public bool? DifferentialCalculusAndCoordinateGeometry { get; set; } = false;
+        public bool? Physics1 { get; set; } = false;
+        public bool? Physics1Lab { get; set; } = false;
+        public bool? IntegralCalculusAndOrdinaryDifferentialEquation { get; set; } = false;
+        public bool? Physics2 { get; set; } = false;
+        public bool? Physics2Lab { get; set; } = false;
+        public bool? ComplexVariableLaplaceAndZTransformation { get; set; } = false;
+        public bool? ElectricalCircuits1 { get; set; } = false;
+        public bool? ElectricalCircuits1Lab { get; set; } = false;
+        public bool? ElectricalCircuits2 { get; set; } = false;
+        public bool? ElectricalCircuits2Lab { get; set; } = false;
+        public bool? ElectronicDevicesLab { get; set; } = false;
+        public bool? ElectronicDevices { get; set; } = false;
+        public bool? ComputerAidedDesignAndDrafting { get; set; } = false;
+        public bool? MatricesVectorsFourierAnalysis { get; set; } = false;
+        public bool? DigitalLogicDesign { get; set; } = false;
+        public bool? DigitalLogicDesignLab { get; set; } = false;
+        public bool? MathematicalMethodsOfEngineering { get; set; } = false;
+        public bool? StatisticsAndProbability { get; set; } = false;
+        public bool? DigitalElectronics { get; set; } = false;
+        public bool? DigitalElectronicsLab { get; set; } = false;
+        public bool? EngineeringManagement { get; set; } = false;
+        public bool? ElectronicsShop { get; set; } = false;
+        public bool? MicroprocessorAndIOSystem { get; set; } = false;
+        public bool? EngineeringEthics { get; set; } = false;
+        public bool? DigitalSignalProcessing { get; set; } = false;
+        public bool? NetworkResourceManagement { get; set; } = false;
+        public bool? VHDLModelingAndLogicSynthesis { get; set; } = false;
+        public bool? VLSICircuitDesign { get; set; } = false;
+        public bool? SignalsAndLinearSystem { get; set; } = false;
+        public bool? RoboticsEngineering { get; set; } = false;
+        public bool? LinearAlgebraComplexVariableLaplaceTransformationAndFourierAnalysis { get; set; } = false;
+        public bool? IntroductionToElectricalEngineering { get; set; } = false;
+        public bool? IntroductionToElectricalEngineeringLab { get; set; } = false;
+        public bool? ProgrammingLanguage1 { get; set; } = false;
+        public bool? ComputerFundamentals { get; set; } = false;
+        public bool? DiscreteMathematics { get; set; } = false;
+        public bool? ProgrammingLanguage2 { get; set; } = false;
+        public bool? DataStructure { get; set; } = false;
+        public bool? IntroductionToDatabase { get; set; } = false;
+        public bool? ComputerOrganizationAndArchitecture { get; set; } = false;
+        public bool? Algorithms { get; set; } = false;
+        public bool? ObjectOrientedProgramming1 { get; set; } = false;
+        public bool? OperatingSystems { get; set; } = false;
+        public bool? ObjectOrientedAnalysisAndDesign { get; set; } = false;
+        public bool? ObjectOrientedProgramming2 { get; set; } = false;
+        public bool? SoftwareEngineering { get; set; } = false;
+        public bool? ComputerNetworks { get; set; } = false;
+        public bool? TheoryOfComputation { get; set; } = false;
+        public bool? CompilerDesign { get; set; } = false;
+        public bool? CSMath { get; set; } = false;
+        public bool? WebTechnologies { get; set; } = false;
+        public bool? AdvancedComputerNetworks { get; set; } = false;
+        public bool? ArtificialIntelligenceAndExpertSystems { get; set; } = false;
+        public bool? ResearchMethodology { get; set; } = false;
+        public bool? Thesis { get; set; } = false;
+        public bool? Internship { get; set; } = false;
+        public bool? AdvanceDatabaseManagementSystem { get; set; } = false;
+        public bool? BasicGraphTheory { get; set; } = false;
+        public bool? MultimediaSystems { get; set; } = false;
+        public bool? DataWarehousingAndDataMining { get; set; } = false;
+        public bool? SoftwareDevelopmentProjectManagement { get; set; } = false;
+        public bool? FormalMethodsofSoftwareEngineering { get; set; } = false;
+        public bool? HumanComputerInteraction { get; set; } = false;
+        public bool? SoftwareRequirementsEngineering { get; set; } = false;
+        public bool? EmbeddedTechnologies { get; set; } = false;
+        public bool? AdvancedTopicsInProgramming1 { get; set; } = false;
+        public bool? AdvancedTopicsInProgramming2 { get; set; } = false;
+        public bool? AdvancedTopicsInProgramming3 { get; set; } = false;
+        public bool? ComputerVisionAndPatternRecognition { get; set; } = false;
+        public bool? LinearProgramming { get; set; } = false;
+        public bool? NetworkSecurity { get; set; } = false;
+        public bool? EmbeddedSystemSoftware { get; set; } = false;
+        public bool? SoftwareQualityAndTesting { get; set; } = false;
+        public bool? AdvancedOperatingSystem { get; set; } = false;
+        public bool? ComputerGraphics { get; set; } = false;
+        public bool? SimulationAndModelling { get; set; } = false;
+        public bool? EGovernance { get; set; } = false;
+        public bool? EnterpriseResourcePlanning { get; set; } = false;
+        public bool? ComputerAndInformationEthics { get; set; } = false;
+        public bool? SoftwareProject1 { get; set; } = false;
+        public bool? SoftwareProject2 { get; set; } = false;
+        public bool? InternetSecurity { get; set; } = false;
+    }
+}

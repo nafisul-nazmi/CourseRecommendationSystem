@@ -81,6 +81,7 @@
     <Compile Include="Services\StudentService.cs" />
     <Compile Include="Services\WarehouseService.cs" />
     <Compile Include="Utilities\CombinationGenerator.cs" />
+    <Compile Include="Utilities\DataExport.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CRS.DAL\CRS.DAL.csproj">

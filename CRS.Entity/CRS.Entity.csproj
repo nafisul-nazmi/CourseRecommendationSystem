@@ -59,6 +59,7 @@
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\StudentCourseAssociation.cs" />
     <Compile Include="Models\Warehouse.cs" />
+    <Compile Include="Models\WarehousePredict.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

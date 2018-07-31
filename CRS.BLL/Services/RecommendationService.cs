@@ -1,9 +1,11 @@
 ﻿using CRS.BLL.Interfaces;
 using CRS.BLL.Utilities;
 using CRS.Entity.Models;
+using SharpLearning.InputOutput.Csv;
 using SharpLearning.RandomForest.Learners;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,8 +58,43 @@ namespace CRS.BLL.Services
             {
                 courseCombinations = GetNoMultipleExamsInADayCombinations(courseCombinations, 3);
             }
-            //return courseCombinations;
-            return null;
+            List<WarehousePredict> warehouses = CreateWarehouse(courseCombinations, studentId);
+            CreateCSV(warehouses);
+            var result = RandomForestPrediction();
+            int maxIndex = 0;
+            double maxValue = 0;
+            for(int i = 0; i < result.Length; i++)
+            {
+                if(result[i] > maxValue)
+                {
+                    maxValue = result[i];
+                    maxIndex = i;
+                }
+            }
+            return courseCombinations[maxIndex];
+        }
+
+        private List<WarehousePredict> CreateWarehouse(List<List<Course>> courseCombinations, int studentId)
+        {
+            List<WarehousePredict> warehouses = new List<WarehousePredict>();
+            foreach(var courseCombination in courseCombinations)
+            {
+                WarehousePredict warehouse = new WarehousePredict
+                {
+                    PerviousCGPA = studentService.Get(studentId).CGPA,
+                };
+                foreach(var course in courseCombination)
+                {
+                    warehouse.GetType().GetProperty(course.CourseName).SetValue(warehouse, true, null);
+                }
+                warehouses.Add(warehouse);
+            }
+            return warehouses;
+        }
+
+        private void CreateCSV(List<WarehousePredict> warehouses)
+        {
+            DataExport.ExportCsv<WarehousePredict>(warehouses, "demo");
         }
 
         private List<List<Course>> GetValidCreditCourseCombinations(List<List<Course>> courseCombinations, double numberOfCredits)
@@ -191,6 +228,21 @@ namespace CRS.BLL.Services
                 return true;
             }
             return false;
+        }
+
+        private double[] RandomForestPrediction()
+        {
+            var parser = new CsvParser(() => new StreamReader(@"F:\data.csv"));
+            var targetName = "NextCGPA";
+            var targets = parser.EnumerateRows(targetName).ToF64Vector();
+            var observations = parser.EnumerateRows(x => x != targetName).ToF64Matrix();
+            var learner = new RegressionRandomForestLearner(trees: numberOfTrees);
+            var model = learner.Learn(observations, targets);
+            
+            parser = new CsvParser(() => new StreamReader(@"F:\demo.csv"));
+            observations = parser.EnumerateRows().ToF64Matrix();
+            var result = model.Predict(observations);
+            return result;
         }
 
     }
