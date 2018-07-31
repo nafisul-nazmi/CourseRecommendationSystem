@@ -43,6 +43,7 @@ namespace CRS.Web
             container.RegisterType<IStudentCourseAssociationService, StudentCourseAssociationService>();
             container.RegisterType<IExamScheduleService, ExamScheduleService>();
             container.RegisterType<IWarehouseService, WarehouseService>();
+            container.RegisterType<IRecommendationService, RecommendationService>();
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }

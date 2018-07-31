@@ -52,6 +52,7 @@
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\ExamSchedule.cs" />
+    <Compile Include="Models\FilterModel.cs" />
     <Compile Include="Models\Prerequisite.cs" />
     <Compile Include="Models\Program.cs" />
     <Compile Include="Models\ProgramCourseAssociation.cs" />

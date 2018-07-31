@@ -63,6 +63,7 @@
     <Compile Include="Interfaces\IPrerequisiteService.cs" />
     <Compile Include="Interfaces\IProgramCourseAssociationService.cs" />
     <Compile Include="Interfaces\IProgramService.cs" />
+    <Compile Include="Interfaces\IRecommendationService.cs" />
     <Compile Include="Interfaces\IStudentCourseAssociationService.cs" />
     <Compile Include="Interfaces\IStudentService.cs" />
     <Compile Include="Interfaces\IWarehouseService.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Services\PrerequisiteService.cs" />
     <Compile Include="Services\ProgramCourseAssociationService.cs" />
     <Compile Include="Services\ProgramService.cs" />
+    <Compile Include="Services\RecommendationService.cs" />
     <Compile Include="Services\StudentCourseAssociationService.cs" />
     <Compile Include="Services\StudentService.cs" />
     <Compile Include="Services\WarehouseService.cs" />
