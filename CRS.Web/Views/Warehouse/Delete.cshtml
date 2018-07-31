@@ -1,0 +1,54 @@
+﻿@model CRS.Web.ViewModels.WarehouseViewModel
+
+@{
+    ViewBag.Title = "Warehouse Delete";
+}
+
+<h2>Warehouse Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Warehouse</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Warehouse.PerviousCGPA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Warehouse.PerviousCGPA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Warehouse.NextCGPA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Warehouse.NextCGPA)
+        </dd>
+
+        <dt>
+            Courses
+        </dt>
+
+        <dd>
+            <ul>
+                @foreach (string course in Model.SelectedCourses)
+                {
+                    <li>@course</li>
+                }
+            </ul>
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -13,6 +13,12 @@ namespace CRS.Web.Controllers
     {
         private IWarehouseService warehouseService;
         private ICourseService courseService;
+        private readonly List<string> excludeProperties = new List<string>
+        {
+            "Id",
+            "PerviousCGPA",
+            "NextCGPA"
+        };
 
         public WarehouseController(IWarehouseService warehouseService, ICourseService courseService)
         {
@@ -25,12 +31,23 @@ namespace CRS.Web.Controllers
         {
             List<WarehouseViewModel> warehouseViewModels = new List<WarehouseViewModel>();
             IEnumerable<Warehouse> warehouses = warehouseService.GetAll();
-            foreach(Warehouse warehouse in warehouses)
+
+            foreach (Warehouse warehouse in warehouses)
             {
+                List<string> allCourseProperties = warehouse.GetType().GetProperties().Select(x => x.Name).Except(excludeProperties).ToList();
+                List<string> selectedCourses = new List<string>();
+                foreach(string courseName in allCourseProperties)
+                {
+                    var value = warehouse.GetType().GetProperty(courseName).GetValue(warehouse, null);
+                    if (value != null && value.Equals(true))
+                    {
+                        selectedCourses.Add(courseName);
+                    }
+                }
                 WarehouseViewModel warehouseViewModel = new WarehouseViewModel
                 {
                     Warehouse = warehouse,
-                    SelectedCourses = warehouse.GetType().GetProperties().Where(x => x.GetValue(warehouse).Equals(true)).Select(x => x.Name)
+                    SelectedCourses = selectedCourses
                 };
                 warehouseViewModels.Add(warehouseViewModel);
             }
@@ -40,72 +57,92 @@ namespace CRS.Web.Controllers
         // GET: Warehouse/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            Warehouse warehouse = warehouseService.Get(id);
+            List<string> allCourseProperties = warehouse.GetType().GetProperties().Select(x => x.Name).Except(excludeProperties).ToList();
+            List<string> selectedCourses = new List<string>();
+            foreach (string courseName in allCourseProperties)
+            {
+                var value = warehouse.GetType().GetProperty(courseName).GetValue(warehouse, null);
+                if (value != null && value.Equals(true))
+                {
+                    selectedCourses.Add(courseName);
+                }
+            }
+            WarehouseViewModel warehouseViewModel = new WarehouseViewModel
+            {
+                Warehouse = warehouse,
+                SelectedCourses = selectedCourses
+            };
+            return View(warehouseViewModel);
         }
 
         // GET: Warehouse/Create
         public ActionResult Create()
         {
-            return View();
+            WarehouseViewModel warehouseViewModel = new WarehouseViewModel
+            {
+                Warehouse = new Warehouse(),
+                AllCourses = courseService.GetAll()
+            };
+            return View(warehouseViewModel);
         }
 
         // POST: Warehouse/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(WarehouseViewModel warehouseViewModel)
         {
+            Warehouse warehouse = warehouseViewModel.Warehouse;
+            foreach(string course in warehouseViewModel.SelectedCourses)
+            {
+                warehouse.GetType().GetProperty(course).SetValue(warehouse, true, null);
+            }
             try
             {
-                // TODO: Add insert logic here
-
+                warehouseService.Add(warehouse);
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
-            }
-        }
-
-        // GET: Warehouse/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Warehouse/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
+                return View(warehouseViewModel);
             }
         }
 
         // GET: Warehouse/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            Warehouse warehouse = warehouseService.Get(id);
+            List<string> allCourseProperties = warehouse.GetType().GetProperties().Select(x => x.Name).Except(excludeProperties).ToList();
+            List<string> selectedCourses = new List<string>();
+            foreach (string courseName in allCourseProperties)
+            {
+                var value = warehouse.GetType().GetProperty(courseName).GetValue(warehouse, null);
+                if (value != null && value.Equals(true))
+                {
+                    selectedCourses.Add(courseName);
+                }
+            }
+            WarehouseViewModel warehouseViewModel = new WarehouseViewModel
+            {
+                Warehouse = warehouse,
+                SelectedCourses = selectedCourses
+            };
+            return View(warehouseViewModel);
         }
 
         // POST: Warehouse/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
         {
+            Warehouse warehouse = warehouseService.Get(id);
             try
             {
-                // TODO: Add delete logic here
-
+                warehouseService.Delete(warehouse);
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                return View(warehouse);
             }
         }
     }
