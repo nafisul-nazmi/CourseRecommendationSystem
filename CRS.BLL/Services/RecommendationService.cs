@@ -4,8 +4,10 @@ using CRS.Entity.Models;
 using CRS.Entity.SupportModels;
 using SharpLearning.InputOutput.Csv;
 using SharpLearning.RandomForest.Learners;
+using SharpLearning.RandomForest.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -24,6 +26,8 @@ namespace CRS.BLL.Services
         private IPrerequisiteService prerequisiteService;
         private int retakeAbleMark;
         private int numberOfTrees;
+        private const string machineLearningModelsRelativePath = @"CRS.BLL\MachineLearningModelFiles\";
+        private string machineLearningModelsAbsolutePath = ConfigurationManager.AppSettings["appRootPath"] + machineLearningModelsRelativePath;
 
         public RecommendationService(IWarehouseService warehouseService, ICourseService courseService, IStudentService studentService, IStudentCourseAssociationService studentCourseAssociationService, IProgramCourseAssociationService programCourseAssociationService, IExamScheduleService examScheduleService, IPrerequisiteService prerequisiteService)
         {
@@ -60,8 +64,7 @@ namespace CRS.BLL.Services
                 courseCombinations = GetNoMultipleExamsInADayCombinations(courseCombinations, 3);
             }
             List<WarehousePredict> warehouses = CreateWarehouse(courseCombinations, studentId);
-            CreateCSV(warehouses);
-            var result = RandomForestPrediction();
+            var result = GetPrediction(warehouses);
             int maxIndex = 0;
             double maxValue = 0;
             for(int i = 0; i < result.Length; i++)
@@ -78,24 +81,20 @@ namespace CRS.BLL.Services
         private List<WarehousePredict> CreateWarehouse(List<List<Course>> courseCombinations, int studentId)
         {
             List<WarehousePredict> warehouses = new List<WarehousePredict>();
+            double previousCGPA = studentService.Get(studentId).CGPA;
             foreach(var courseCombination in courseCombinations)
             {
                 WarehousePredict warehouse = new WarehousePredict
                 {
-                    PerviousCGPA = studentService.Get(studentId).CGPA,
+                    PerviousCGPA = previousCGPA
                 };
                 foreach(var course in courseCombination)
                 {
-                    warehouse.GetType().GetProperty(course.CourseName).SetValue(warehouse, true, null);
+                    warehouse.GetType().GetProperty(course.CourseName).SetValue(warehouse, 1, null);
                 }
                 warehouses.Add(warehouse);
             }
             return warehouses;
-        }
-
-        private void CreateCSV(List<WarehousePredict> warehouses)
-        {
-            DataExport.ExportCsv<WarehousePredict>(warehouses, "demo");
         }
 
         private List<List<Course>> GetValidCreditCourseCombinations(List<List<Course>> courseCombinations, double numberOfCredits)
@@ -231,19 +230,38 @@ namespace CRS.BLL.Services
             return false;
         }
 
-        private double[] RandomForestPrediction()
+        private double[] GetPrediction(List<WarehousePredict> warehouses)
         {
-            var parser = new CsvParser(() => new StreamReader(@"F:\data.csv"));
+            string modelFile = machineLearningModelsAbsolutePath + "random_forest_model.xml";
+            if(!File.Exists(modelFile))
+            {
+                Train();
+            }
+            
+            var loadedModel = RegressionForestModel.Load(() => new StreamReader(machineLearningModelsAbsolutePath + "random_forest_model.xml"));
+            List<double> results = new List<double>();
+            foreach(var warehouse in warehouses)
+            {
+                List<double> observation = new List<double>();
+                var properties = warehouse.GetType().GetProperties();
+                foreach(var property in properties)
+                {
+                    observation.Add(Convert.ToDouble(property.GetValue(warehouse, null)));
+                }
+                results.Add(loadedModel.Predict(observation.ToArray()));
+            }
+            return results.ToArray();
+        }
+
+        private void Train()
+        {
+            var parser = new CsvParser(() => new StreamReader(machineLearningModelsAbsolutePath + "warehouse_data.csv"), separator: ',');
             var targetName = "NextCGPA";
             var targets = parser.EnumerateRows(targetName).ToF64Vector();
             var observations = parser.EnumerateRows(x => x != targetName).ToF64Matrix();
             var learner = new RegressionRandomForestLearner(trees: numberOfTrees);
             var model = learner.Learn(observations, targets);
-            
-            parser = new CsvParser(() => new StreamReader(@"F:\demo.csv"));
-            observations = parser.EnumerateRows().ToF64Matrix();
-            var result = model.Predict(observations);
-            return result;
+            model.Save(() => new StreamWriter(machineLearningModelsAbsolutePath + "random_forest_model.xml"));
         }
 
     }

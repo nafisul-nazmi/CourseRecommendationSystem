@@ -46,6 +46,7 @@
       <HintPath>..\packages\SharpLearning.RandomForest.0.28.3\lib\net461\SharpLearning.RandomForest.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -81,7 +82,6 @@
     <Compile Include="Services\StudentService.cs" />
     <Compile Include="Services\WarehouseService.cs" />
     <Compile Include="Utilities\CombinationGenerator.cs" />
-    <Compile Include="Utilities\DataExport.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CRS.DAL\CRS.DAL.csproj">
@@ -95,7 +95,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="MachineLearningModelFiles\warehouse_data.csv" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="MachineLearningModelFiles\random_forest_model.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,4 +1,4 @@
-﻿@model CRS.Entity.Models.FilterModel
+﻿@model CRS.Entity.SupportModels.FilterModel
 @using CRS.Entity.Models
 
 @{
@@ -43,7 +43,7 @@
         <ul>
             @foreach (var course in (ViewBag.Courses as List<Course>))
             {
-                <li>course.CourseName</li>
+                <li>@course.CourseName</li>
             }
         </ul>
     </div>
