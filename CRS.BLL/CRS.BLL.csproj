@@ -46,6 +46,7 @@
       <HintPath>..\packages\SharpLearning.RandomForest.0.28.3\lib\net461\SharpLearning.RandomForest.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -58,22 +59,29 @@
     <Compile Include="Interfaces\IAdminService.cs" />
     <Compile Include="Interfaces\ICourseService.cs" />
     <Compile Include="Interfaces\IDepartmentService.cs" />
+    <Compile Include="Interfaces\IExamScheduleService.cs" />
     <Compile Include="Interfaces\IGenericService.cs" />
     <Compile Include="Interfaces\IPrerequisiteService.cs" />
     <Compile Include="Interfaces\IProgramCourseAssociationService.cs" />
     <Compile Include="Interfaces\IProgramService.cs" />
+    <Compile Include="Interfaces\IRecommendationService.cs" />
     <Compile Include="Interfaces\IStudentCourseAssociationService.cs" />
     <Compile Include="Interfaces\IStudentService.cs" />
+    <Compile Include="Interfaces\IWarehouseService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AdminService.cs" />
     <Compile Include="Services\CourseService.cs" />
     <Compile Include="Services\DepartmentService.cs" />
+    <Compile Include="Services\ExamScheduleService.cs" />
     <Compile Include="Services\GenericService.cs" />
     <Compile Include="Services\PrerequisiteService.cs" />
     <Compile Include="Services\ProgramCourseAssociationService.cs" />
     <Compile Include="Services\ProgramService.cs" />
+    <Compile Include="Services\RecommendationService.cs" />
     <Compile Include="Services\StudentCourseAssociationService.cs" />
     <Compile Include="Services\StudentService.cs" />
+    <Compile Include="Services\WarehouseService.cs" />
+    <Compile Include="Utilities\CombinationGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CRS.DAL\CRS.DAL.csproj">
@@ -87,7 +95,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="MachineLearningModelFiles\warehouse_data.csv" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="MachineLearningModelFiles\random_forest_model.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

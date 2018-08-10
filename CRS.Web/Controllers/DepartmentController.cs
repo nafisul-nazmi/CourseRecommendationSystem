@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace CRS.Web.Controllers
 {
-    public class DepartmentController : Controller
+    public class DepartmentController : AdminSecuredController
     {
         private IDepartmentService departmentService;
 

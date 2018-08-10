@@ -1,0 +1,46 @@
+﻿@model CRS.Web.ViewModels.WarehouseViewModel
+
+@{
+    ViewBag.Title = "Warehouse Details";
+}
+
+<h2>Warehouse Details</h2>
+
+<div>
+    <h4>Warehouse</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Warehouse.PerviousCGPA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Warehouse.PerviousCGPA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Warehouse.NextCGPA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Warehouse.NextCGPA)
+        </dd>
+
+        <dt>
+            Courses
+        </dt>
+
+        <dd>
+            <ul>
+                @foreach(string course in Model.SelectedCourses)
+                {
+                    <li>@course</li>
+                }
+            </ul>
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

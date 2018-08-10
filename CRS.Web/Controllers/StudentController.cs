@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace CRS.Web.Controllers
 {
-    public class StudentController : Controller
+    public class StudentController : AdminSecuredController
     {
         private IStudentService studentService;
         private IProgramService programService;

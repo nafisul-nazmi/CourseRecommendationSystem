@@ -1,0 +1,74 @@
+﻿@model IEnumerable<CRS.Entity.Models.ExamSchedule>
+
+@{
+    ViewBag.Title = "Exam Schedule Index";
+}
+
+<h2>Exam Schedule Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<table class="table" id="exam-schedule-table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Course.CourseName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Day)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Slot)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Course.CourseName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Day)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Slot)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+@section Scripts {
+    <script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#exam-schedule-table").DataTable({
+                "lengthMenu": [[10, 20, 50, 100, -1], [10, 20, 50, 100, "All"]],
+                "columns": [
+                    null,
+                    null,
+                    null,
+                    {
+                        "searchable": false,
+                        "sortable": false
+                    }
+                ]
+            });
+        });
+    </script>
+}
+
+@section Styles {
+    <link href="~/Content/DataTables/css/jquery.dataTables.css" rel="stylesheet" />
+}

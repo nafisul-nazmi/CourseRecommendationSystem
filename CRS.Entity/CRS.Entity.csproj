@@ -51,11 +51,15 @@
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Department.cs" />
+    <Compile Include="Models\ExamSchedule.cs" />
+    <Compile Include="SupportModels\FilterModel.cs" />
     <Compile Include="Models\Prerequisite.cs" />
     <Compile Include="Models\Program.cs" />
     <Compile Include="Models\ProgramCourseAssociation.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\StudentCourseAssociation.cs" />
+    <Compile Include="Models\Warehouse.cs" />
+    <Compile Include="SupportModels\WarehousePredict.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

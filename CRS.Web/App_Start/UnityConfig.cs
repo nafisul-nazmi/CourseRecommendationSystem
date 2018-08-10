@@ -29,6 +29,8 @@ namespace CRS.Web
             container.RegisterType<IPrerequisiteRepository, PrerequisiteRepository>();
             container.RegisterType<IStudentRepository, StudentRepository>();
             container.RegisterType<IStudentCourseAssociationRepository, StudentCourseAssociationRepository>();
+            container.RegisterType<IExamScheduleRepository, ExamScheduleRepository>();
+            container.RegisterType<IWarehouseRepository, WarehouseRepository>();
 
             // Services
             container.RegisterType<IAdminService, AdminService>();
@@ -39,6 +41,9 @@ namespace CRS.Web
             container.RegisterType<IPrerequisiteService, PrerequisiteService>();
             container.RegisterType<IStudentService, StudentService>();
             container.RegisterType<IStudentCourseAssociationService, StudentCourseAssociationService>();
+            container.RegisterType<IExamScheduleService, ExamScheduleService>();
+            container.RegisterType<IWarehouseService, WarehouseService>();
+            container.RegisterType<IRecommendationService, RecommendationService>();
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }

@@ -7,10 +7,10 @@
 <h2>Program Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Program</h4>
         <hr />
@@ -32,6 +32,13 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.CourseIds, "Courses", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.ListBoxFor(model => model.CourseIds, new MultiSelectList(Model.Courses, "Id", "CourseName"), new { @class = "form-control", id = "course-drop-down" })
+            </div>
+        </div>
+
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
@@ -45,4 +52,14 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/select2.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#course-drop-down").select2();
+        });
+    </script>
+}
+
+@section Styles {
+    <link href="~/Content/css/select2.css" rel="stylesheet" />
 }

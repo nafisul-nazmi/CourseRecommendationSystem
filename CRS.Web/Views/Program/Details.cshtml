@@ -27,6 +27,19 @@
             @Html.DisplayFor(model => model.Department.DepartmentName)
         </dd>
 
+        <dt>
+            Courses
+        </dt>
+
+        <dd>
+            <ul>
+                @foreach (var course in Model.ProgramCourseAssociations.Select(x => x.Course))
+                {
+                    <li>@course.CourseName</li>
+                }
+            </ul>
+        </dd>
+
     </dl>
 </div>
 <p>
