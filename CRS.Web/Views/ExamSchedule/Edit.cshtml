@@ -1,0 +1,58 @@
+﻿@model CRS.Web.ViewModels.ExamScheduleViewModel
+
+@{
+    ViewBag.Title = "Exam Schedule Edit";
+}
+
+<h2>Exam Schedule Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>ExamSchedule</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ExamSchedule.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ExamSchedule.CourseId, "CourseId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ExamSchedule.CourseId", new SelectList(Model.Courses, "Id", "CourseName", Model.ExamSchedule.CourseId), htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ExamSchedule.CourseId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ExamSchedule.Day, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ExamSchedule.Day, new { htmlAttributes = new { @class = "form-control", min = "1", max = "6" } })
+                @Html.ValidationMessageFor(model => model.ExamSchedule.Day, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ExamSchedule.Slot, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ExamSchedule.Slot, new { htmlAttributes = new { @class = "form-control", min = "1", max = "3" } })
+                @Html.ValidationMessageFor(model => model.ExamSchedule.Slot, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

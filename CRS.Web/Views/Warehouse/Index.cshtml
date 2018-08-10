@@ -1,0 +1,80 @@
+﻿@model IEnumerable<CRS.Web.ViewModels.WarehouseViewModel>
+
+@{
+    ViewBag.Title = "Warhouse Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table" id="warehouse-table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Warehouse.PerviousCGPA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Warehouse.NextCGPA)
+            </th>
+            <th>
+                Courses
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+    @foreach (var item in Model)
+     {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Warehouse.PerviousCGPA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Warehouse.NextCGPA)
+            </td>
+            <td>
+                <ul>
+                    @foreach (string course in item.SelectedCourses)
+                     {
+                        <li>@course</li>
+                     }
+                </ul>
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.Warehouse.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Warehouse.Id })
+            </td>
+        </tr>
+     }
+    </tbody>
+
+</table>
+
+@section Scripts {
+    <script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#warehouse-table").DataTable({
+                "lengthMenu": [[10, 20, 50, 100, -1], [10, 20, 50, 100, "All"]],
+                "columns": [
+                    null,
+                    null,
+                    null,
+                    {
+                        "searchable": false,
+                        "sortable": false
+                    }
+                ]
+            });
+        });
+    </script>
+}
+
+@section Styles {
+    <link href="~/Content/DataTables/css/jquery.dataTables.css" rel="stylesheet" />
+}

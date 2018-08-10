@@ -1,20 +1,131 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{28E76519-8B1E-4B13-9E39-D5399E6439CF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CRS.DAL</RootNamespace>
+    <AssemblyName>CRS.DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
   </PropertyGroup>
-
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="EntityFramework" Version="6.2.0" />
-    <PackageReference Include="SharpLearning.RandomForest" Version="0.28.3" />
-    <PackageReference Include="Unity" Version="5.8.6" />
-    <PackageReference Include="Unity.Mvc5" Version="1.3.0" />
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
-
   <ItemGroup>
-    <Folder Include="Context\" />
-    <Folder Include="Generic\" />
-    <Folder Include="Repositories\" />
+    <Compile Include="Contexts\CRSContext.cs" />
+    <Compile Include="Interfaces\IAdminRepository.cs" />
+    <Compile Include="Interfaces\ICourseRepository.cs" />
+    <Compile Include="Interfaces\IDepartmentRepository.cs" />
+    <Compile Include="Interfaces\IExamScheduleRepository.cs" />
+    <Compile Include="Interfaces\IGenericRepository.cs" />
+    <Compile Include="Interfaces\IPrerequisiteRepository.cs" />
+    <Compile Include="Interfaces\IProgramCourseAssociationRepository.cs" />
+    <Compile Include="Interfaces\IProgramRepository.cs" />
+    <Compile Include="Interfaces\IStudentCourseAssociationRepository.cs" />
+    <Compile Include="Interfaces\IStudentRepository.cs" />
+    <Compile Include="Interfaces\IWarehouseRepository.cs" />
+    <Compile Include="Migrations\201807251857249_Initial.cs" />
+    <Compile Include="Migrations\201807251857249_Initial.Designer.cs">
+      <DependentUpon>201807251857249_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807281709394_PrerequisiteUpdate.cs" />
+    <Compile Include="Migrations\201807281709394_PrerequisiteUpdate.Designer.cs">
+      <DependentUpon>201807281709394_PrerequisiteUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807281725291_CoursePrereqFieldUpdate.cs" />
+    <Compile Include="Migrations\201807281725291_CoursePrereqFieldUpdate.Designer.cs">
+      <DependentUpon>201807281725291_CoursePrereqFieldUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807281813417_PrerequisiteStructureChange.cs" />
+    <Compile Include="Migrations\201807281813417_PrerequisiteStructureChange.Designer.cs">
+      <DependentUpon>201807281813417_PrerequisiteStructureChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807301115589_ExamScheduleAdd.cs" />
+    <Compile Include="Migrations\201807301115589_ExamScheduleAdd.Designer.cs">
+      <DependentUpon>201807301115589_ExamScheduleAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807302208279_WarehouseAdd.cs" />
+    <Compile Include="Migrations\201807302208279_WarehouseAdd.Designer.cs">
+      <DependentUpon>201807302208279_WarehouseAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\AdminRepository.cs" />
+    <Compile Include="Repositories\CourseRepository.cs" />
+    <Compile Include="Repositories\DepartmentRepository.cs" />
+    <Compile Include="Repositories\ExamScheduleRepository.cs" />
+    <Compile Include="Repositories\GenericRepository.cs" />
+    <Compile Include="Repositories\PrerequisiteRepository.cs" />
+    <Compile Include="Repositories\ProgramCourseAssociationRepository.cs" />
+    <Compile Include="Repositories\ProgramRepository.cs" />
+    <Compile Include="Repositories\StudentCourseAssociationRepository.cs" />
+    <Compile Include="Repositories\StudentRepository.cs" />
+    <Compile Include="Repositories\WarehouseRepository.cs" />
   </ItemGroup>
-
+  <ItemGroup>
+    <ProjectReference Include="..\CRS.Entity\CRS.Entity.csproj">
+      <Project>{bc402946-6f58-49ee-93d8-81c5d41ce46b}</Project>
+      <Name>CRS.Entity</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201807251857249_Initial.resx">
+      <DependentUpon>201807251857249_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807281709394_PrerequisiteUpdate.resx">
+      <DependentUpon>201807281709394_PrerequisiteUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807281725291_CoursePrereqFieldUpdate.resx">
+      <DependentUpon>201807281725291_CoursePrereqFieldUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807281813417_PrerequisiteStructureChange.resx">
+      <DependentUpon>201807281813417_PrerequisiteStructureChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807301115589_ExamScheduleAdd.resx">
+      <DependentUpon>201807301115589_ExamScheduleAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807302208279_WarehouseAdd.resx">
+      <DependentUpon>201807302208279_WarehouseAdd.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

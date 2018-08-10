@@ -1,0 +1,43 @@
+﻿@model CRS.Entity.Models.ExamSchedule
+
+@{
+    ViewBag.Title = "Exam Schedule Details";
+}
+
+<h2>Exam Schedule Details</h2>
+
+<div>
+    <h4>ExamSchedule</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Course.CourseName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Course.CourseName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Day)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Day)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Slot)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Slot)
+        </dd>
+
+    </dl>
+</div>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

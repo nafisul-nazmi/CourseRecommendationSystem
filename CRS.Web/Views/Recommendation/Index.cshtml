@@ -1,0 +1,50 @@
+﻿@model CRS.Entity.SupportModels.FilterModel
+@using CRS.Entity.Models
+
+@{
+    ViewBag.Title = "Recommendation Index";
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+}
+
+<h2>Recommendation Index</h2>
+
+<form method="POST">
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label">Number of Credits: </label>
+            <input type="number" name="NumberOfCredits" required class="form-control" min="9" max="22" />
+        </div>
+        <div class="form-group">
+            <label class="control-label">Avoid Retakeable Subject?</label>
+            @Html.CheckBoxFor(m => m.AvoidRetakeable, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label class="control-label">Avoid Clash Exams?</label>
+            @Html.CheckBoxFor(m => m.AvoidClashExams, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label class="control-label">Avoid 2 Exams In A Day?</label>
+            @Html.CheckBoxFor(m => m.AvoidTwoExamsInADay, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label class="control-label">Avoid 3 Exams In A Day?</label>
+            @Html.CheckBoxFor(m => m.AvoidThreeExamsInADay, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Get Recommendation" class="form-control" />
+        </div>
+    </div>
+</form>
+
+@if (ViewBag.Courses != null)
+{
+    <div>
+        Recommended Courses:
+        <ul>
+            @foreach (var course in (ViewBag.Courses as List<Course>))
+            {
+                <li>@course.CourseName</li>
+            }
+        </ul>
+    </div>
+}
