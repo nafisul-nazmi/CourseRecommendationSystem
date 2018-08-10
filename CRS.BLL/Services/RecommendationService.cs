@@ -1,6 +1,7 @@
 ﻿using CRS.BLL.Interfaces;
 using CRS.BLL.Utilities;
 using CRS.Entity.Models;
+using CRS.Entity.SupportModels;
 using SharpLearning.InputOutput.Csv;
 using SharpLearning.RandomForest.Learners;
 using System;
